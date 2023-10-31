@@ -8,6 +8,12 @@ const form = {
     loginButton: () => document.querySelector("#login-button")
 };
 
+// firebase.auth().onAuthStateChanged(function (user) {
+//     if (user) {
+//         window.location.href = '/pages/home/home.html'
+//     }
+// })
+
 function onChangeEmail() {
     toggleEmailError();
     toggleButtonDisabled();
@@ -71,6 +77,7 @@ function login() {
 }
 
 function goToRegister() {
+    showLoading();
     window.location.href = "pages/register/register.html"
 
 };
