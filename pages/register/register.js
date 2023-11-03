@@ -85,18 +85,12 @@ function register() {
     });
 }
 
-// firebase.auth().onAuthStateChanged(function (user) {
-//     if (user) {
-//         window.location.href = '/pages/home/home.html'
-//     }
-// })
-
 function getErrorMessage(error) {
     if (error = 'auth/email-already-in-use') {
-        alert("Usuário já cadastrado")
+        alert("Usuário já cadastrado");
     }
     if (error = 'undefined') {
-        alert("Usuário já cadastrado")
+        alert("Usuário já cadastrado");
     }
 
 }
