@@ -41,5 +41,10 @@ const transactionService = {
             .collection('transactions')
             .doc(getTransationUid())
             .update(transaction);
+    },
+
+    resume: value => {
+        
     }
+
 }
