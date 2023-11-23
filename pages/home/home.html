@@ -7,6 +7,8 @@
 
 <body>
     <header>
+        <button type="button" id="youTube" class="clear" onclick="goToYoutube()">Recomendação - Finanças</button>
+        <button type="button" id="report" class="clear" onclick="exportToExcel()">Relatório</button>
         <button type="button" class="clear" onclick="logout()">Sair</button>
     </header>
 
@@ -23,10 +25,14 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.5/dist/xlsx.full.min.js"></script>
+
+
 <script src="../../firebase-init.js"></script>
 <script src="../../auth-gard.js"></script>
 <script src="../../loading.js"></script>
 <script src="../../services/transaction.service.js"></script>
+<script src="../../pages/report/report.js"></script>
 <script src="home.js"></script>
 
 </html>

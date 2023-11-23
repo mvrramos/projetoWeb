@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "excel4node": "^1.8.2",
     "firebase": "^10.5.2",
-    "firebaseui": "^6.1.0"
+    "firebaseui": "^6.1.0",
+    "table2excel": "^1.0.4",
+    "xlsx": "^0.18.5"
   }
 }

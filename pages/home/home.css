@@ -36,9 +36,6 @@ ol li:hover button.danger {
     display: block;
 }
 
-header {
-    background: gray;
-}
 
 div {
     display: flex;

@@ -1,3 +1,4 @@
+// Logout
 function logout() {
     firebase.auth().signOut().then(() => {
         window.location.href = '../../index.html'
@@ -6,17 +7,21 @@ function logout() {
     });
 }
 
+// Ver mudanças na autenticação
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
         findTransaction(user);
         calculateAndDisplayTotals(user);
+        createResumeElements();
     }
 });
 
+// Ir para novas transações
 function newTransaction() {
     window.location.href = '../transaction/transaction.html';
 }
 
+// Mostrar transações do usuário na tela (busca e exibe)
 function findTransaction(user) {
     showLoading();
     transactionService.findByUser(user)
@@ -31,6 +36,7 @@ function findTransaction(user) {
         })
 }
 
+// Adiciona as transações na tela
 function addTransitionsToScreen(transactions) {
     const orderedList = document.querySelector("#transactions");
 
@@ -51,6 +57,7 @@ function addTransitionsToScreen(transactions) {
     });
 }
 
+// Cria os elementos da transação
 function createTransactionListItem(transaction) {
     const li = document.createElement('li');
     li.classList.add(transaction.type);
@@ -62,6 +69,7 @@ function createTransactionListItem(transaction) {
     return li;
 }
 
+// Cria o botão de remover
 function createDeleteButton(transaction) {
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = 'Remover';
@@ -73,6 +81,7 @@ function createDeleteButton(transaction) {
     return deleteButton;
 }
 
+// Cria o parágrafo
 function createParagraph(value) {
     const element = document.createElement('p');
     element.innerHTML = value;
@@ -80,6 +89,7 @@ function createParagraph(value) {
     return element;
 }
 
+// Confirmação de exclusão
 function askRemoveTransaction(transaction) {
     const shouldRemove = confirm("Deseja remover a transação?");
     if (shouldRemove) {
@@ -87,6 +97,7 @@ function askRemoveTransaction(transaction) {
     }
 }
 
+// Exclui a transação
 function removeTransaction(transaction) {
     showLoading();
 
@@ -102,16 +113,17 @@ function removeTransaction(transaction) {
         })
 }
 
-
+// Formata data
 function formatDate(date) {
     return new Date(date).toLocaleDateString('pt-br');
 }
 
+// Formata dinheiro
 function formatMoney(money) {
     return `${money.currency} ${money.value.toFixed(2)}`;
 }
 
-
+// Encontra transação por ID do usuário
 function findTransactionByUid(uid) {
     showLoading();
 
@@ -138,6 +150,7 @@ function findTransactionByUid(uid) {
         });
 }
 
+// Cria o elemento de total
 function createTotalElement(id, labelText) {
     const totalElement = document.createElement('div');
     totalElement.id = id;
@@ -153,6 +166,7 @@ function createTotalElement(id, labelText) {
     return totalElement;
 }
 
+// Cria o resumo
 function createResumeElements() {
     const resumeElement = document.createElement('div');
     resumeElement.id = 'resume';
@@ -169,46 +183,17 @@ function createResumeElements() {
     transactionsList.parentNode.insertBefore(resumeElement, transactionsList);
 }
 
-
-function calculateTotal(transactions) {
-    return transactions.reduce((total, transaction) => {
-        const moneyValue = transaction.money.value;
-        return total + moneyValue;
-    }, 0);
-}
-
-function findTransactionByUid(uid) {
-    showLoading();
-
-    transactionService.findByUid(uid)
-        .then(transaction => {
-            hideLoading();
-            if (transaction) {
-                fillTransactionScreen(transaction);
-                toggleSaveButtonDisabled();
-            } else {
-                alert("Documento não encontrado");
-                window.location.href = '../home/home.html';
-            }
-        })
-        .catch((error) => {
-            hideLoading();
-            alert("Erro ao preencher documento");
-        });
-}
-
+// Calcula o total das transações
 function calculateAndDisplayTotals(user) {
     transactionService.findByUser(user)
         .then(transactions => {
             hideLoading();
 
-            const totalIncome = calculateTotal(transactions, 'income');
-            const totalExpense = calculateTotal(transactions, 'expense');
-            const total = totalIncome - totalExpense;
+            const totals = calculateTotals(transactions);
 
-            updateTotalElement('totalBalance', 'Total: ', total);
-            updateTotalElement('totalIncome', 'Entradas: ', totalIncome);
-            updateTotalElement('totalExpense', 'Saídas: ', totalExpense);
+            updateTotalElement('totalBalance', 'Total: ', totals.totalBalance);
+            updateTotalElement('totalIncome', 'Entradas: ', totals.totalIncome);
+            updateTotalElement('totalExpense', 'Saídas: ', totals.totalExpense);
         })
         .catch(error => {
             hideLoading();
@@ -217,29 +202,44 @@ function calculateAndDisplayTotals(user) {
         });
 }
 
+//Calcula por tipo 
+function calculateTotals(transactions) {
+    const totalIncome = calculateTotal(transactions, 'income');
+    const totalExpense = calculateTotal(transactions, 'expense');
+    const totalBalance = totalIncome - totalExpense;
+
+    return {
+        totalIncome,
+        totalExpense,
+        totalBalance
+    };
+}
+
+// Busca o tipo de transação
 function calculateTotal(transactions, type) {
     return transactions
         .filter(transaction => transaction.type === type)
         .reduce((total, transaction) => total + transaction.money.value, 0);
 }
 
+// Atualiza os elementos
 function updateTotalElement(id, labelText, value) {
     const totalElement = document.getElementById(id);
 
     if (totalElement) {
         const span = totalElement.querySelector('span');
         if (span) {
-            span.textContent = value.toFixed(2); // Arredonde para 2 casas decimais
+            span.textContent = value.toFixed(2);
         }
     } else {
-        // Criação do elemento
         const newTotalElement = createTotalElement(id, labelText);
-        // Adição do elemento após o botão "Sair"
         const header = document.querySelector('header');
         header.parentNode.insertBefore(newTotalElement, header.nextSibling);
-        // Atualização do valor no novo elemento
         updateTotalElement(id, labelText, value);
     }
 }
 
-createResumeElements();
+// Navega para o youtube
+function goToYoutube() {
+    window.location.href = 'https://www.youtube.com/@PrimoPobre';
+}

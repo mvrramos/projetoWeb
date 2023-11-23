@@ -43,8 +43,4 @@ const transactionService = {
             .update(transaction);
     },
 
-    resume: value => {
-        
-    }
-
 }

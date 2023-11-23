@@ -1,0 +1,43 @@
+{
+    "transactions": {
+        "docID0": {
+            "date": "2023-11-05",
+            "description": "Salário",
+            "money": {
+                "currency": "BRL",
+                "value": "3500"
+            },
+            "transactionsType": "Outros",
+            "type": "income",
+            "user": {
+                "uid": "userID"
+            }
+        }
+    },
+    "docID1": {
+        "date": "2023-11-13",
+        "description": "Tenis",
+        "money": {
+            "currency": "BRL",
+            "value": "280"
+        },
+        "transactionsType": "Outros",
+        "type": "expense",
+        "user": {
+            "uid": "userID"
+        }
+    },
+    "docID2": {
+        "date": "2023-11-12",
+        "description": "Lifebox",
+        "money": {
+            "currency": "BRL",
+            "value": "300"
+        },
+        "transactionsType": "Alimentação",
+        "type": "expense",
+        "user": {
+            "uid": "userID"
+        }
+    }
+}
