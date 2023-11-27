@@ -108,6 +108,13 @@ header button {
 }
 
 header {
-    text-align: right;
-    background: gray;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    position: flex;
+}
+
+h1 {
+    text-align: center;
+    color: #555;
 }

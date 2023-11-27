@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Relatório - Controle de gastos</title>
+</head>
+
+<body>
+    <header>
+        <button type="button" id="youTube" class="clear" onclick="goToVideo()">Educação financeira</button>
+        <button type="button" id="report" class="clear" onclick="goToHome()">Home</button>
+        <button type="button" class="clear" onclick="logout()">Sair</button>
+    </header>
+
+    <div class="graphBox">
+        <div class="box">
+            <div>
+                <h4>Despesas</h4>
+
+                <canvas id="pieChartExpense"></canvas>
+            </div>
+        </div>
+        <div class="box">
+            <div>
+                <h4>Despesas</h4>
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+
+        <div class="box">
+            <div>
+                <h4>Receitas</h4>
+                <canvas id="pieChartIncome"></canvas>
+            </div>
+        </div>
+        <div class="box">
+            <div>
+                <h4>Resumo total</h4>
+
+                <canvas id="resumeChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Restante do seu HTML -->
+</body>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../global.css">
+<link rel="stylesheet" href="report.css">
+
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="../../firebase-init.js"></script>
+<script src="../../auth-gard.js"></script>
+<script src="../../loading.js"></script>
+<script src="../../services/transaction.service.js"></script>
+<script src="../../pages/video/video.js"></script>
+<script src="../../pages/transaction/export.js"></script>
+<script src="report.js"></script>
+
+</html>

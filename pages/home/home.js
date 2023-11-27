@@ -1,12 +1,3 @@
-// Logout
-function logout() {
-    firebase.auth().signOut().then(() => {
-        window.location.href = '../../index.html'
-    }).catch((error) => {
-        alert("Erro ao fazer logout");
-    });
-}
-
 // Ver mudanças na autenticação
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
@@ -179,7 +170,7 @@ function createResumeElements() {
     resumeElement.appendChild(totalExpenseElement);
     resumeElement.appendChild(totalBalanceElement);
 
-    const transactionsList = document.getElementById('transactions');
+    const transactionsList = document.querySelector('#transactions');
     transactionsList.parentNode.insertBefore(resumeElement, transactionsList);
 }
 
@@ -239,7 +230,12 @@ function updateTotalElement(id, labelText, value) {
     }
 }
 
-// Navega para o youtube
-function goToYoutube() {
-    window.location.href = 'https://www.youtube.com/@PrimoPobre';
+// Navega para os videos
+function goToVideo() {
+    window.location.href = '../video/video.html';
+}
+
+// Navega para o relatório
+function goToReport() {
+    window.location.href = '../report/report.html';
 }
